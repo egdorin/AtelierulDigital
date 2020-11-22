@@ -7,13 +7,37 @@ import java.util.stream.IntStream;
 public class Main {
 
     public static void main(String[] args) {
+        Integer[] intArray = {3,2,-3,-2,3,0};
+        int [] v = {-1,-1,-1,2, -2,3};
        // firstChallenge();
 
        // secondChallenge();
-        Integer[] intArray = {3,2,-3,-2,3,0};
-        System.out.println(thirdChallenge(intArray,0));
-
+//
+//        System.out.println(thirdChallenge(intArray,0));
+        System.out.println(fourthChallenge(v,0));
     }
+    public static int fourthChallenge(int v[], int sum)
+    {
+        int count =0;
+        for (int i = 0; i < v.length - 2; i++) {
+
+            for (int j = i + 1; j < v.length - 1; j++) {
+                for (int k = j + 1; k < v.length; k++) {
+                    if (v[i] + v[j] + v[k] == sum) {
+                        v[i]=1;
+                        v[j]=1;
+                        v[k]=1;
+                       // System.out.print("Triplet is " + v[i] + ", " + v[j] + ", " + v[k]);
+                        count++;
+                    }
+                }
+            }
+        }
+
+        // If we reach here, then no triplet was found
+        return count;
+    }
+
     public static int thirdChallenge(Integer[] input, int sum) {
         int count =0;
         Set<Integer> setArray = new HashSet<>(Arrays.asList(input));
@@ -23,7 +47,6 @@ public class Main {
                 setArray.remove(sum - input[i]);
                 count++;
             }
-
         }
         return count;
     }
