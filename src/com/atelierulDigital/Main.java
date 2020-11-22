@@ -1,11 +1,108 @@
 package com.atelierulDigital;
 
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) {
-        firstChallenge();
+       // firstChallenge();
+        System.out.println(compute(7));
+        System.out.println(compute2(7));
+
 
     }
+    public static String compute(int num){
+        //Stage 1
+        String result = getDivisible(num);
+        if("".equals(result) && "".equals(countDigitsStage1(num))){
+            System.out.println(num);
+        }
+        return result+ countDigitsStage1(num);
+    }
+    public static String compute2(int num){
+        //Stage 1
+        String emptyResult = "";
+        String result = getDivisible(num);
+        return result+countDigitsStage2(num);
+    }
+    private static String getDivisible(int num) {
+        String result = "";
+        if(num % 3 == 0){
+           result += "Foo";
+        }
+        if( num % 5 == 0) {
+            result += "Bar";
+        }
+
+        if( num % 7 == 0) {
+            result += "Qix";
+        }
+        return result;
+    }
+    //Stage1
+    public static String countDigitsStage1(int number){
+
+
+        String result = "";
+        ArrayList<Integer> digitsArray = extractDigits(number);
+        for (int i =digitsArray.size()-1; i>=0;  i--){
+            if(digitsArray.get(i) == 3){
+                result+="Foo";
+            }
+            if(digitsArray.get(i) == 5){
+                result+="Bar";
+            }
+            if(digitsArray.get(i) == 7){
+                result+="Qix";
+            }
+        }
+        return result;
+    }
+
+    //Stage2
+    public static String countDigitsStage2(int number){
+        String result = "";
+        ArrayList<Integer> digitsArray = extractDigits(number);
+        if("".equals(getDivisible( number ))){
+            for (int i =digitsArray.size()-1; i>=0;  i--){
+                if(digitsArray.get(i) == 0){
+                    result+="*";
+                }else{
+                    result +=digitsArray.get(i);
+                }
+            }
+            return result;
+        }
+        for (int i =digitsArray.size()-1; i>=0;  i--){
+            if(digitsArray.get(i) == 3){
+                result+="Foo";
+            }
+            if(digitsArray.get(i) == 5){
+                result+="Bar";
+            }
+            if(digitsArray.get(i) == 7){
+                result+="Qix";
+            }
+            if(digitsArray.get(i) == 0){
+                result+="*";
+            }
+        }
+
+        return result;
+    }
+
+
+
+
+    private static ArrayList<Integer> extractDigits(int number) {
+        ArrayList<Integer> ditgitsArray = new ArrayList<>();
+        while(number != 0){
+            ditgitsArray.add(number % 10);
+            number /=10;
+        }
+        return ditgitsArray;
+    }
+
 
     public static void firstChallenge() {
         for(int i =1; i<=100;i++){
