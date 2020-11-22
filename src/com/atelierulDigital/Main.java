@@ -1,15 +1,36 @@
 package com.atelierulDigital;
 
-import java.util.ArrayList;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 public class Main {
 
     public static void main(String[] args) {
        // firstChallenge();
+
+       // secondChallenge();
+        Integer[] intArray = {3,2,-3,-2,3,0};
+        System.out.println(thirdChallenge(intArray,0));
+
+    }
+    public static int thirdChallenge(Integer[] input, int sum) {
+        int count =0;
+        Set<Integer> setArray = new HashSet<>(Arrays.asList(input));
+        for(int i=0; i<setArray.size(); i++){
+            if(setArray.contains(sum - input[i])){
+                setArray.remove(input[i]);
+                setArray.remove(sum - input[i]);
+                count++;
+            }
+
+        }
+        return count;
+    }
+
+    public static void secondChallenge(){
         System.out.println(compute(7));
         System.out.println(compute2(7));
-
-
     }
     public static String compute(int num){
         //Stage 1
